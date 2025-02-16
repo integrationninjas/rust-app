@@ -1,0 +1,15 @@
+[package]
+name = "rust-app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.0.1"
+mongodb = "2.5.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+futures = "0.3"
+dotenv = "0.15"  # For environment variables
+log = "0.4"      # For logging
+env_logger = "0.9" # For logging
+validator = { version = "0.16", features = ["derive"] } # For input validation
