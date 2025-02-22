@@ -13,3 +13,8 @@ dotenv = "0.15"  # For environment variables
 log = "0.4"      # For logging
 env_logger = "0.9" # For logging
 validator = { version = "0.16", features = ["derive"] } # For input validation
+
+[profile.release]
+opt-level = "z"
+strip = true
+lto = true
