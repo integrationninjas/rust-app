@@ -1,26 +1,25 @@
-# Use Debian-based Rust image for building to match runtime environment
 FROM rust:1.84.1-bullseye AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy actual source code
-COPY . .
+# Copy only Cargo.toml and Cargo.lock first to cache dependencies
+COPY Cargo.toml Cargo.lock ./
 
-# Pre-build dependencies
+# Copy the source directory
+COPY src ./src
+
+# Download dependencies
+RUN cargo fetch
+
+# Build the application
 RUN cargo build --release
 
-# Use the same Debian-based image to prevent GLIBC issues
-FROM debian:bullseye
+FROM debian:bullseye-slim
 
-# Set working directory
 WORKDIR /app
 
-# Copy the compiled binary
 COPY --from=builder /app/target/release/rust-app /app/rust-app
 
-# Expose the port
 EXPOSE 5050
 
-# Run the application
 CMD ["/app/rust-app"]
