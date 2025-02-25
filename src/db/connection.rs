@@ -13,7 +13,7 @@ pub async fn get_db() -> Result<Database, String> {
 
     // Construct the connection string securely
     let mongo_uri = format!(
-        "mongodb+srv://{}:{}@{}/?retryWrites=true&w=majority&appName=test",
+        "mongodb+srv://{}:{}@{}/?retryWrites=true&w=majority&appName=DevCluster",
         user, password, host
     );
 
