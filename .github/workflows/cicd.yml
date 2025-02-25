@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
       - name: Login to docker hub
-        run: docker login -u {{ secrets.DOCKER_USERNAME }} -p {{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
         run: docker build -t integrationninjas/rust-app .
       - name: Push Image to docker hub
@@ -26,4 +26,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f rust-app-container  
       - name: Run docker container
-        run: docker run -d -p 5050:5050 --name rust-app-container -e MONGO_USER='{{ secrets.MONGO_USER }}' -e MONGO_PASSWORD='{{ secrets.MONGO_PASSWORD }}' -e MONGO_HOST='{{ secrets.MONGO_HOST }}' -e MONGO_DB='{{ secrets.MONGO_DB }}'    
+        run: docker run -d -p 5050:5050 --name rust-app-container -e MONGO_USER='${{ secrets.MONGO_USER }}' -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' -e MONGO_HOST='${{ secrets.MONGO_HOST }}' -e MONGO_DB='${{ secrets.MONGO_DB }}'    
